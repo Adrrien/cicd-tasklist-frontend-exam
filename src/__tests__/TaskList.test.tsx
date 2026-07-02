@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { TaskList } from '../components/TaskList';
 import type { Task } from '../types/task';

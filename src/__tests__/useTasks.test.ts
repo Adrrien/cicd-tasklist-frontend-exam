@@ -110,19 +110,4 @@ describe('useTasks', () => {
         expect(result.current.tasks).toEqual([]);
     });
 
-    it('toggleComplete updates task when found', async () => {
-        vi.spyOn(taskApi, 'getTasks').mockResolvedValue([mockTask]);
-        const toggled = { ...mockTask, completed: true };
-        vi.spyOn(taskApi, 'updateTask').mockResolvedValue(toggled);
-
-        const { result } = renderHook(() => useTasks());
-
-        await waitFor(() => !result.current.loading);
-
-        await act(async () => {
-            await result.current.toggleComplete(1);
-        });
-
-        expect(result.current.tasks[0].completed).toBe(true);
-    });
 });

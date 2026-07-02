@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { TaskItem } from '../components/TaskItem';
 import type { Task } from '../types/task';
@@ -42,7 +42,7 @@ describe('TaskItem', () => {
         expect(screen.queryByText('Test Description')).not.toBeInTheDocument();
     });
 
-    it('calls onToggle when checkbox is clicked', () => {
+    it('calls onToggle when checkbox is clicked', async () => {
         const onToggle = vi.fn();
         render(
             <TaskItem
@@ -53,7 +53,10 @@ describe('TaskItem', () => {
             />
         );
 
-        fireEvent.click(screen.getByRole('checkbox'));
+        await act(async () => {
+            fireEvent.click(screen.getByRole('checkbox'));
+        });
+
         expect(onToggle).toHaveBeenCalledWith(1);
     });
 

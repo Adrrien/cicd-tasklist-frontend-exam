@@ -1,4 +1,4 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { TaskList } from '../components/TaskList';
 import type { Task } from '../types/task';
@@ -73,14 +73,16 @@ describe('TaskList', () => {
         expect(screen.getByText('Erreur : Erreur réseau')).toBeInTheDocument();
     });
 
-    it('calls onToggle when checkbox is clicked', () => {
+    it('calls onToggle when checkbox is clicked', async () => {
         const onToggle = vi.fn();
         render(
             <TaskList tasks={mockTasks} loading={false} error={null}
                 onToggle={onToggle} onDelete={vi.fn()} onEdit={vi.fn()} />
         );
         const checkboxes = screen.getAllByRole('checkbox');
-        fireEvent.click(checkboxes[0]);
+        await act(async () => {
+            fireEvent.click(checkboxes[0]);
+        });
         expect(onToggle).toHaveBeenCalledWith(1);
     });
 

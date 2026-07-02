@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = "adrrien/tasklist-frontend-exam"
         DOCKER_CREDENTIALS_ID = "dockerhub-credential"
-        SONAR_PROJECT_KEY = "tasklist-frontend-exam"
+        SONAR_PROJECT_KEY = "adrrien-tasklist-frontend-exam"
         BUILD_TAG = "${env.BUILD_NUMBER}"
         IMAGE_TAG = "${DOCKER_IMAGE_NAME}:${BUILD_TAG}"
         IMAGE_LATEST = "${DOCKER_IMAGE_NAME}:latest"
